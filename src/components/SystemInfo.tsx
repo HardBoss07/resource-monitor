@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { invoke } from '@tauri-apps/api/core';
+import {useEffect, useState} from 'react';
+import {invoke} from '@tauri-apps/api/core';
 
-import type { SystemInfoInterface} from "@/util/interfaces/SystemInfoInterface";
+import type {SystemInfoInterface} from "@/util/interfaces/SystemInfoInterface";
 
 export default function SystemInfo() {
     const [systemInfo, setSystemInfo] = useState<SystemInfoInterface | null>(null);
@@ -25,7 +25,8 @@ export default function SystemInfo() {
 
     return (
         <div>
-            <h2>System: {systemInfo.system_name}</h2>
+            <h2>System Info:</h2>
+            <p>System: {systemInfo.system_name}</p>
             <p>OS Version: {systemInfo.os_version}</p>
             <p>Kernel Version: {systemInfo.kernel_version}</p>
             <p>Total Memory (MB): {Math.round(systemInfo.total_memory / 1024 / 1024)}</p>
