@@ -1,39 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, use } from 'react';
 import { invoke } from '@tauri-apps/api/core'; // Import invoke from Tauri API
 
 export default function Home() {
-  const [greetingMessage, setGreetingMessage] = useState<string>('');
-  const [nameInput, setNameInput] = useState<string>('Tauri User');
+  const [resourceData, setResourceData] = useState<any>(null); // State to hold resource data
 
-  // Function to call the 'greet' command
-  const sendGreeting = async () => {
-    try {
-      // Call the Rust command 'greet' with the 'nameInput' as an argument
-      const message = await invoke('greet', { name: nameInput });
-      setGreetingMessage(message as string); // Cast to string as invoke returns unknown
-    } catch (err) {
-      console.error('Error invoking greet:', err);
-      setGreetingMessage(`Error: Failed to greet.`); // Simple error message
-    }
-  };
+  useEffect(() => {
+    // Function to fetch resource data from the Rust backend
+    const fetchResourceData = async () => {
+      try {
+        const data = await invoke('get_all_resource_data');
+        setResourceData(data);
+      } catch (err) {
+        console.error('Error fetching resource data:', err);
+      }
+    };
+
+    fetchResourceData();
+  }, []);
 
   return (
     <>
-      <h1>Test</h1>
+      <h1>Resource Monitor</h1>
       <div>
-        <input
-          type="text"
-          value={nameInput}
-          onChange={(e) => setNameInput(e.target.value)}
-          placeholder="Enter your name"
-        />
-        <button onClick={sendGreeting}>
-          Greet from Frontend
-        </button>
-        {greetingMessage && (
-          <p>{greetingMessage}</p>
+        {resourceData && (
+          <div>
+            <h2>Resource Data</h2>
+            <pre>{JSON.stringify(resourceData, null, 2)}</pre>
+          </div>
         )}
       </div>
     </>
