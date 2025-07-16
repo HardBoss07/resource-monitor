@@ -1,5 +1,5 @@
 use sysinfo::System;
-use crate::data_structures::ResourceData;
+use crate::data_structures::{CpuInfo, ResourceData, SystemInfo};
 use crate::monitors::cpu_monitor::CpuMonitor;
 use crate::monitors::system_monitor::SystemMonitor;
 
@@ -28,5 +28,13 @@ impl ResourceMonitor {
                 .unwrap_or_default()
                 .as_millis() as u64,
         }
+    }
+
+    pub fn collect_cpu_data(&mut self) -> CpuInfo {
+        CpuMonitor::get_cpu_info(&mut self.sys)
+    }
+
+    pub fn collect_system_data(&mut self) -> SystemInfo {
+        SystemMonitor::get_system_info(&mut self.sys)
     }
 }

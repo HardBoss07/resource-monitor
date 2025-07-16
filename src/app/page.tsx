@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
-import { invoke } from '@tauri-apps/api/core'; // Import invoke from Tauri API
+import { useState, useEffect } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import SystemInfo from "@/components/SystemInfo"; // Import invoke from Tauri API
 
 export default function Home() {
   const [resourceData, setResourceData] = useState<any>(null); // State to hold resource data
@@ -31,6 +32,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <SystemInfo />
     </>
   );
 }
