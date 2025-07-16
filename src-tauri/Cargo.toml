@@ -24,5 +24,4 @@ serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 tauri = { version = "2.6.2", features = [] } # <--- Removed "os" feature here
 tauri-plugin-log = "2"
-os_info = "3.12.0"
 sysinfo = "^0.30.5"
