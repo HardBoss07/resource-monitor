@@ -1,7 +1,13 @@
 // src-tauri/src/lib.rs
+mod data_structures;
+mod monitors;
+mod resource_monitor;
+
+use resource_monitor::ResourceMonitor;
+use data_structures::ResourceData;
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#[cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 // Define your Tauri commands here
@@ -12,16 +18,9 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn get_system_info() -> String {
-    let os_info = os_info::get(); // Make sure os_info is in your Cargo.toml
-    let os_type = os_info.os_type();
-    let version = os_info.version();
-    let bitness = os_info.bitness();
-
-    format!(
-        "OS: {:?}, Version: {}, Bitness: {:?}",
-        os_type, version, bitness
-    )
+fn get_all_resource_data() -> ResourceData {
+  let mut monitor = ResourceMonitor::new();
+  monitor.collect_all_data()
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -38,7 +37,7 @@ pub fn run() {
             Ok(())
         })
         // Register your commands here
-        .invoke_handler(tauri::generate_handler![greet, get_system_info])
+        .invoke_handler(tauri::generate_handler![greet, get_all_resource_data])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
