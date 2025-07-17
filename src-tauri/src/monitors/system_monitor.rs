@@ -1,4 +1,4 @@
-use sysinfo::{System, Cpu};
+use sysinfo::{System};
 use crate::data_structures::SystemInfo;
 
 #[derive(Debug)]

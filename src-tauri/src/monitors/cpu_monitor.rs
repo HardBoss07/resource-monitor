@@ -1,4 +1,4 @@
-use sysinfo::{Cpu, System, RefreshKind, CpuRefreshKind};
+use sysinfo::{System};
 use crate::data_structures::CpuInfo;
 
 #[derive(Debug)]
