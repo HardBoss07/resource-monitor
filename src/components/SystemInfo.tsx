@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {useEffect, useState} from 'react';
 import {invoke} from '@tauri-apps/api/core';
@@ -24,13 +24,15 @@ export default function SystemInfo() {
     if (!systemInfo) return <div>Loading system info...</div>;
 
     return (
-        <div>
-            <h2>System Info:</h2>
-            <p>System: {systemInfo.system_name}</p>
-            <p>OS Version: {systemInfo.os_version}</p>
-            <p>Kernel Version: {systemInfo.kernel_version}</p>
-            <p>Total Memory (MB): {Math.round(systemInfo.total_memory / 1024 / 1024)}</p>
-            <p>Total CPUs: {systemInfo.total_cpus}</p>
+        <div className="p-4 space-y-4">
+            <h2 className="text-xl font-bold">System Info</h2>
+            <div className="text-sm space-y-1">
+                <p>System: {systemInfo.system_name}</p>
+                <p>OS Version: {systemInfo.os_version}</p>
+                <p>Kernel Version: {systemInfo.kernel_version}</p>
+                <p>Total Memory (MB): {Math.round(systemInfo.total_memory / 1024 / 1024)}</p>
+                <p>Total CPUs: {systemInfo.total_cpus}</p>
+            </div>
         </div>
     );
 }
