@@ -1,0 +1,49 @@
+'use client'
+
+import {useEffect, useRef, useState} from "react";
+import {invoke} from "@tauri-apps/api/core";
+
+import type {MemoryInfoInterface} from "@/util/interfaces/MemoryInfoInterface";
+import LineGraph from "@/components/LineGraph";
+
+export default function MemoryInfo() {
+    const [memoryInfo, setMemoryInfo] = useState<MemoryInfoInterface | null>(null);
+    const [memoryHistory, setMemoryHistory] = useState<number[]>([]);
+    const isCancelled = useRef(true);
+
+    const fetchLoop = async () => {
+        while (!isCancelled.current) {
+            try {
+                const data = await invoke<MemoryInfoInterface>("get_memory_data");
+                setMemoryInfo(data);
+                setMemoryHistory(prev => [...prev.slice(-99), data.used]);
+            } catch (err) {
+                console.error("Failed to get Memory Data:", err);
+                break;
+            }
+        }
+    };
+
+    useEffect(() => {
+        isCancelled.current = false;
+        fetchLoop();
+
+        return () => {
+            isCancelled.current = true;
+        };
+    }, []);
+
+    if (!memoryInfo) return <div>Loading Memory Info...</div>;
+
+    return (
+        <div className="p-4 space-y-4">
+            <h2 className="text-xl font-bold">Memory Info</h2>
+            <div className="text-sm space-y-1">
+                <p>Total Memory (MB): {memoryInfo.total}</p>
+                <p>Current Used Memory: {memoryInfo.used}</p>
+                <p>Current Free Memory: {memoryInfo.free}</p>
+            </div>
+            <LineGraph dataPoints={memoryHistory} upperRange={memoryInfo.total}/>
+        </div>
+    )
+}

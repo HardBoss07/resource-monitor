@@ -9,9 +9,9 @@ impl MemoryMonitor {
         sys.refresh_memory();
 
         MemoryInfo {
-            total: sys.total_memory(),
-            used: sys.total_memory() - sys.free_memory(),
-            free: sys.free_memory(),
+            total: sys.total_memory() / 0x100000, // Convert to MB
+            used: (sys.total_memory() - sys.free_memory()) / 0x100000, // Convert to MB
+            free: sys.free_memory() / 0x100000, // Convert to MB
         }
     }
 }

@@ -2,7 +2,7 @@
 
 import {LineGraphInterface} from "@/util/interfaces/LineGraphInterface";
 
-export default function LineGraph({dataPoints, maxPoints = 100}: LineGraphInterface) {
+export default function LineGraph({dataPoints, maxPoints = 100, upperRange = 100}: LineGraphInterface) {
     const data = dataPoints.slice(-maxPoints); // Keep only the last N points
 
     const width = 300;
@@ -10,7 +10,7 @@ export default function LineGraph({dataPoints, maxPoints = 100}: LineGraphInterf
 
     const points = data.map((value, i) => {
         const x = (i / (data.length - 1 || 1)) * width;
-        const y = height - (value / 100) * height;
+        const y = height - (value / upperRange) * height;
         return `${x},${y}`;
     }).join(' ');
 
