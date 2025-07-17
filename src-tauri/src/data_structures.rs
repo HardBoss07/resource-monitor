@@ -1,5 +1,14 @@
 use serde::{Deserialize, Serialize};
 
+// Represents the overall resource data to be sent to the frontend
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct ResourceData {
+    pub cpu: CpuInfo,
+    pub sys: SystemInfo, 
+    pub mem: MemoryInfo,
+    pub timestamp_ms: u64,
+}
+
 // Represents CPU information
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CpuInfo {
@@ -9,12 +18,12 @@ pub struct CpuInfo {
     pub cores: usize,
 }
 
-// Represents the overall resource data to be sent to the frontend
+// Represents memory information
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct ResourceData {
-    pub cpu: CpuInfo,
-    pub sys: SystemInfo, 
-    pub timestamp_ms: u64,
+pub struct MemoryInfo {
+    pub total: u64,
+    pub used: u64,
+    pub free: u64,
 }
 
 // Represents system information
