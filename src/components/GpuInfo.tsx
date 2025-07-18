@@ -40,13 +40,16 @@ export default function GpuInfo() {
 
     if (!gpuInfo) return <div>Loading GPU Info...</div>;
 
+    // Calculate VRAM used percentage
+    const vramUsedPercentage = ((gpuInfo.memory_used_mb / gpuInfo.memory_total_mb) * 100).toFixed(2);
+
     return (
         <div className="data">
             <h2>GPU Info</h2>
             <div>
                 <p>Name: {gpuInfo.name}</p>
                 <p>Temperature: {gpuInfo.temperature}°C</p>
-                <p>VRAM Used: {gpuInfo.memory_used_mb} MB</p>
+                <p>VRAM Used: {gpuInfo.memory_used_mb} MB ({vramUsedPercentage}%)</p>
                 <p>VRAM Total: {gpuInfo.memory_total_mb} MB</p>
                 <p>Current Utilization: {gpuInfo.utilization_percent}%</p>
                 <p>Fan Speed: {gpuInfo.fan_speed_percent ?? "N/A"}%</p>

@@ -39,13 +39,17 @@ export default function MemoryInfo() {
 
     if (!memoryInfo) return <div>Loading Memory Info...</div>;
 
+    // Calculate percentages for display
+    const usedPercentage = ((memoryInfo.used / memoryInfo.total) * 100).toFixed(2); // ToFixed to 2 decimal places
+    const freePercentage = ((memoryInfo.free / memoryInfo.total) * 100).toFixed(2); // ToFixed to 2 decimal places
+
     return (
         <div className="data">
             <h2>Memory Info</h2>
             <div>
-                <p>Total Memory (MB): {memoryInfo.total}</p>
-                <p>Current Used Memory: {memoryInfo.used}</p>
-                <p>Current Free Memory: {memoryInfo.free}</p>
+                <p>Total Memory MB: {memoryInfo.total}</p>
+                <p>Current Used Memory MB (%): {memoryInfo.used} ({usedPercentage}%)</p>
+                <p>Current Free Memory MB (%): {memoryInfo.free} ({freePercentage}%)</p>
             </div>
             <LineGraph dataPoints={memoryHistory} upperRange={memoryInfo.total} label="Memory Usage (MB):"/>
         </div>

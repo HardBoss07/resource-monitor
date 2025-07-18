@@ -31,7 +31,7 @@ export default function SystemInfo() {
                 <p>OS Version: {systemInfo.os_version}</p>
                 <p>Kernel Version: {systemInfo.kernel_version}</p>
                 <p>Total Memory (MB): {systemInfo.total_memory}</p>
-                <p>Total CPUs: {systemInfo.total_cpus}</p>
+                <p>Total Logical CPUs: {systemInfo.total_cpus}</p>
             </div>
         </div>
     );

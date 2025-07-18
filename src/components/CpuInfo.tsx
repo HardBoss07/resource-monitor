@@ -44,7 +44,7 @@ export default function CpuInfo() {
             <h2>CPU Info</h2>
             <div>
                 <p>Current Usage: {cpuInfo.usage.toFixed(1)}%</p>
-                <p>Clock Frequency (MHz): {cpuInfo.frequency}</p>
+                <p>Clock Frequency MHz: {cpuInfo.frequency}</p>
                 <p>Cores: {cpuInfo.cores}</p>
             </div>
             <LineGraph dataPoints={usageHistory} label="CPU Usage:"/>
