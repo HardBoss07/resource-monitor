@@ -3,6 +3,7 @@
 import SystemInfo from "@/components/SystemInfo";
 import CpuInfo from "@/components/CpuInfo";
 import MemoryInfo from "@/components/MemoryInfo";
+import GpuInfo from "@/components/GpuInfo";
 
 export default function Home() {
     return (
@@ -11,6 +12,7 @@ export default function Home() {
             <SystemInfo/>
             <CpuInfo/>
             <MemoryInfo/>
+            <GpuInfo/>
         </main>
     );
 }
