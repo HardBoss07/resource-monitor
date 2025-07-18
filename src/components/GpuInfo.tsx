@@ -41,9 +41,9 @@ export default function GpuInfo() {
     if (!gpuInfo) return <div>Loading GPU Info...</div>;
 
     return (
-        <div className="p-4 space-y-4">
-            <h2 className="text-xl font-bold">GPU Info</h2>
-            <div className="text-sm space-y-1">
+        <div className="data">
+            <h2>GPU Info</h2>
+            <div>
                 <p>Name: {gpuInfo.name}</p>
                 <p>Temperature: {gpuInfo.temperature}°C</p>
                 <p>VRAM Used: {gpuInfo.memory_used_mb} MB</p>

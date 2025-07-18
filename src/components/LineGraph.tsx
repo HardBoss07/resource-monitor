@@ -15,12 +15,12 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
     }).join(' ');
 
     return (
-        <div className="w-full max-w-md">
+        <div className="line-graph">
             <h3>{label}</h3>
-            <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-24">
+            <svg viewBox={`0 0 ${width} ${height}`}>
                 <polyline
                     fill="none"
-                    stroke="#FFFFFF"
+                    stroke="#000000"
                     strokeWidth="2"
                     points={points}
                 />

@@ -40,9 +40,9 @@ export default function CpuInfo() {
     if (!cpuInfo) return <div>Loading CPU info...</div>;
 
     return (
-        <div className="p-4 space-y-4">
-            <h2 className="text-xl font-bold">CPU Info</h2>
-            <div className="text-sm space-y-1">
+        <div className="data">
+            <h2>CPU Info</h2>
+            <div>
                 <p>Current Usage: {cpuInfo.usage.toFixed(1)}%</p>
                 <p>Clock Frequency (MHz): {cpuInfo.frequency}</p>
                 <p>Cores: {cpuInfo.cores}</p>

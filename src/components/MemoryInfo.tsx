@@ -40,9 +40,9 @@ export default function MemoryInfo() {
     if (!memoryInfo) return <div>Loading Memory Info...</div>;
 
     return (
-        <div className="p-4 space-y-4">
-            <h2 className="text-xl font-bold">Memory Info</h2>
-            <div className="text-sm space-y-1">
+        <div className="data">
+            <h2>Memory Info</h2>
+            <div>
                 <p>Total Memory (MB): {memoryInfo.total}</p>
                 <p>Current Used Memory: {memoryInfo.used}</p>
                 <p>Current Free Memory: {memoryInfo.free}</p>
