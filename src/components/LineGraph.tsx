@@ -7,7 +7,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
 
     const width = 300;
     const height = 100;
-    const padding = 0;
+    const padding = 12;
 
     const points = data.length > 1
         ? data
@@ -21,6 +21,13 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
             ? `${width / 2},${height / 2}`
             : "";
 
+    const upperRangeY = padding;
+    const lowerRangeY = height - padding;
+
+    const gridLineColor = "#666";
+    const textColor = "#444";
+    const fontSize = "9";
+
     return (
         <div className="line-graph" style={{maxWidth: width, width: '100%'}}>
             {label && <h3 style={{marginBottom: 4}}>{label}</h3>}
@@ -30,6 +37,66 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 height={height}
                 style={{display: "block"}}
             >
+                <line
+                    x1="0"
+                    y1={upperRangeY}
+                    x2={width}
+                    y2={upperRangeY}
+                    stroke={gridLineColor}
+                    strokeWidth="1"
+                    strokeDasharray="4 2"
+                />
+
+                <text
+                    x={padding + 3}
+                    y={upperRangeY - 3}
+                    fill={textColor}
+                    fontSize={fontSize}
+                    dominantBaseline="auto"
+                >
+                    {upperRange}
+                </text>
+                <text
+                    x={width - padding - 3}
+                    y={upperRangeY - 3}
+                    fill={textColor}
+                    fontSize={fontSize}
+                    dominantBaseline="auto"
+                    textAnchor="end"
+                >
+                    {upperRange}
+                </text>
+
+                <line
+                    x1="0"
+                    y1={lowerRangeY}
+                    x2={width}
+                    y2={lowerRangeY}
+                    stroke={gridLineColor}
+                    strokeWidth="1"
+                    strokeDasharray="4 2"
+                />
+
+                <text
+                    x={padding + 3}
+                    y={lowerRangeY + 12}
+                    fill={textColor}
+                    fontSize={fontSize}
+                    dominantBaseline="hanging"
+                >
+                    0
+                </text>
+                <text
+                    x={width - padding - 3}
+                    y={lowerRangeY + 12}
+                    fill={textColor}
+                    fontSize={fontSize}
+                    dominantBaseline="hanging"
+                    textAnchor="end"
+                >
+                    0
+                </text>
+
                 <polyline
                     fill="none"
                     stroke="#000"

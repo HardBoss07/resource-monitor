@@ -11,8 +11,8 @@ export default function Home() {
             <h1>Resource Monitor</h1>
                 <div>
                     <SystemInfo/>
-                    <CpuInfo/>
                     <MemoryInfo/>
+                    <CpuInfo/>
                     <GpuInfo/>
                 </div>
         </main>
