@@ -48,12 +48,10 @@ export default function GpuInfo() {
                 <p>Temperature: {gpuInfo.temperature}°C</p>
                 <p>VRAM Used: {gpuInfo.memory_used_mb} MB</p>
                 <p>VRAM Total: {gpuInfo.memory_total_mb} MB</p>
-                <p>Utilization: {gpuInfo.utilization_percent}%</p>
+                <p>Current Utilization: {gpuInfo.utilization_percent}%</p>
                 <p>Fan Speed: {gpuInfo.fan_speed_percent ?? "N/A"}%</p>
             </div>
-            <LineGraph
-                dataPoints={utilizationHistory}
-            />
+            <LineGraph dataPoints={utilizationHistory} label="Utilization History:"/>
         </div>
     );
 }
