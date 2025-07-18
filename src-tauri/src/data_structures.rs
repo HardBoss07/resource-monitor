@@ -6,6 +6,7 @@ pub struct ResourceData {
     pub cpu: CpuInfo,
     pub sys: SystemInfo, 
     pub mem: MemoryInfo,
+    pub gpu: GpuInfo,
     pub timestamp_ms: u64,
 }
 

@@ -1,4 +1,4 @@
-use sysinfo::{System};
+use sysinfo::System;
 use crate::data_structures::CpuInfo;
 
 #[derive(Debug)]
@@ -6,7 +6,6 @@ pub struct CpuMonitor;
 
 impl CpuMonitor {
     pub fn get_cpu_info(sys: &mut System) -> CpuInfo {
-        std::thread::sleep(sysinfo::MINIMUM_CPU_UPDATE_INTERVAL);
         sys.refresh_cpu();
 
         let global_cpu = sys.global_cpu_info();

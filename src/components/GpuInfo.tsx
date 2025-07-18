@@ -1,10 +1,14 @@
 'use client'
 
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {invoke} from "@tauri-apps/api/core";
 
 import type {GpuInfoInterface} from "@/util/interfaces/GpuInfoInterface";
 import LineGraph from "@/components/LineGraph";
+import {FETCH_DELAY_MS} from "@/util/consts";
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 
 export default function GpuInfo() {
     const [gpuInfo, setGpuInfo] = useState<GpuInfoInterface | null>(null);
@@ -21,6 +25,7 @@ export default function GpuInfo() {
                 console.error("Failed to get GPU Data:", err);
                 break;
             }
+            await sleep(FETCH_DELAY_MS);
         }
     };
 

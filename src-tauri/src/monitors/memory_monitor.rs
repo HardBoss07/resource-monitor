@@ -1,5 +1,6 @@
 use sysinfo::System;
 use crate::data_structures::MemoryInfo;
+use crate::consts::MB;
 
 #[derive(Debug)]
 pub struct MemoryMonitor;
@@ -9,9 +10,9 @@ impl MemoryMonitor {
         sys.refresh_memory();
 
         MemoryInfo {
-            total: sys.total_memory() / 0x100000, // Convert to MB
-            used: (sys.total_memory() - sys.free_memory()) / 0x100000, // Convert to MB
-            free: sys.free_memory() / 0x100000, // Convert to MB
+            total: sys.total_memory() / MB,
+            used: (sys.total_memory() - sys.free_memory()) / MB,
+            free: sys.free_memory() / MB,
         }
     }
 }

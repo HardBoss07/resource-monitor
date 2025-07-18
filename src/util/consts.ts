@@ -1,0 +1,1 @@
+export const FETCH_DELAY_MS: number = 200;
