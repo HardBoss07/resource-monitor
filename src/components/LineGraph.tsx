@@ -5,15 +5,19 @@ import {LineGraphInterface} from "@/util/interfaces/LineGraphInterface";
 export default function LineGraph({dataPoints, label, maxPoints = 100, upperRange = 100}: LineGraphInterface) {
     const data = dataPoints.slice(-maxPoints);
 
-    const width = 300;
-    const height = 100;
+    const width = 450;
+    const height = 200;
     const padding = 12;
+
+    const graphHeight = height - (2 * padding);
+    const graphTopY = padding;
+    const graphBottomY = height - padding;
 
     const points = data.length > 1
         ? data
             .map((value, i) => {
                 const x = padding + (i / (data.length - 1)) * (width - 2 * padding);
-                const y = height - padding - (value / upperRange) * (height - 2 * padding);
+                const y = graphBottomY - (value / upperRange) * graphHeight;
                 return `${x},${y}`;
             })
             .join(' ')
@@ -21,12 +25,14 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
             ? `${width / 2},${height / 2}`
             : "";
 
-    const upperRangeY = padding;
-    const lowerRangeY = height - padding;
-
     const gridLineColor = "#666";
     const textColor = "#444";
-    const fontSize = "9";
+    const fontSize = "11";
+
+    const getGridY = (percentage: number) => {
+        const valueAtPercentage = (percentage / 100) * upperRange;
+        return graphBottomY - (valueAtPercentage / upperRange) * graphHeight;
+    };
 
     return (
         <div className="line-graph" style={{maxWidth: width, width: '100%'}}>
@@ -37,19 +43,25 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 height={height}
                 style={{display: "block"}}
             >
-                <line
-                    x1="0"
-                    y1={upperRangeY}
-                    x2={width}
-                    y2={upperRangeY}
-                    stroke={gridLineColor}
-                    strokeWidth="1"
-                    strokeDasharray="4 2"
-                />
+                {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((percentage) => {
+                    const lineY = getGridY(percentage);
+                    return (
+                        <line
+                            key={`grid-line-${percentage}`}
+                            x1="0"
+                            y1={lineY}
+                            x2={width}
+                            y2={lineY}
+                            stroke={gridLineColor}
+                            strokeWidth="1"
+                            strokeDasharray="4 2"
+                        />
+                    );
+                })}
 
                 <text
                     x={padding + 3}
-                    y={upperRangeY - 3}
+                    y={getGridY(100) - 3}
                     fill={textColor}
                     fontSize={fontSize}
                     dominantBaseline="auto"
@@ -58,7 +70,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 </text>
                 <text
                     x={width - padding - 3}
-                    y={upperRangeY - 3}
+                    y={getGridY(100) - 3}
                     fill={textColor}
                     fontSize={fontSize}
                     dominantBaseline="auto"
@@ -67,19 +79,9 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                     {upperRange}
                 </text>
 
-                <line
-                    x1="0"
-                    y1={lowerRangeY}
-                    x2={width}
-                    y2={lowerRangeY}
-                    stroke={gridLineColor}
-                    strokeWidth="1"
-                    strokeDasharray="4 2"
-                />
-
                 <text
                     x={padding + 3}
-                    y={lowerRangeY + 12}
+                    y={getGridY(0) + 12}
                     fill={textColor}
                     fontSize={fontSize}
                     dominantBaseline="hanging"
@@ -88,7 +90,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 </text>
                 <text
                     x={width - padding - 3}
-                    y={lowerRangeY + 12}
+                    y={getGridY(0) + 12}
                     fill={textColor}
                     fontSize={fontSize}
                     dominantBaseline="hanging"

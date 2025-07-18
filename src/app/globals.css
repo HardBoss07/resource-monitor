@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 main {
-  @apply p-6 space-y-6 bg-white min-h-screen text-gray-700;
+  @apply p-6 space-y-6 bg-white min-h-screen text-gray-600;
 }
 
 main h1 {
@@ -33,5 +33,5 @@ main > div {
 }
 
 .line-graph svg {
-  @apply w-full h-36 border border-gray-300 rounded-md bg-gray-50;
+  @apply w-full h-auto border border-gray-300 rounded-md bg-gray-50;
 }
