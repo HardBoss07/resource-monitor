@@ -9,10 +9,12 @@ export default function Home() {
     return (
         <main>
             <h1>Resource Monitor</h1>
-            <SystemInfo/>
-            <CpuInfo/>
-            <MemoryInfo/>
-            <GpuInfo/>
+                <div>
+                    <SystemInfo/>
+                    <CpuInfo/>
+                    <MemoryInfo/>
+                    <GpuInfo/>
+                </div>
         </main>
     );
 }
