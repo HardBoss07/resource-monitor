@@ -18,6 +18,17 @@ pub struct CpuInfo {
     pub cores: usize,
 }
 
+// Represents the GPU information
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct GpuInfo {
+    pub name: String,
+    pub temperature: u32,
+    pub memory_used_mb: u64,
+    pub memory_total_mb: u64,
+    pub utilization_percent: u32,
+    pub fan_speed_percent: Option<u32>,
+}
+
 // Represents memory information
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct MemoryInfo {

@@ -1,8 +1,9 @@
 use sysinfo::System;
-use crate::data_structures::{CpuInfo, ResourceData, SystemInfo, MemoryInfo};
+use crate::data_structures::{CpuInfo, ResourceData, SystemInfo, MemoryInfo, GpuInfo};
 use crate::monitors::cpu_monitor::CpuMonitor;
 use crate::monitors::system_monitor::SystemMonitor;
 use crate::monitors::memory_monitor::MemoryMonitor;
+use crate::monitors::gpu_monitor::GpuMonitor;
 
 pub struct ResourceMonitor {
     sys: System,
@@ -43,5 +44,16 @@ impl ResourceMonitor {
 
     pub fn collect_memory_data(&mut self) -> MemoryInfo {
         MemoryMonitor::get_memory_info(&mut self.sys)
+    }
+
+    pub fn collect_gpu_data(&mut self) -> GpuInfo {
+        GpuMonitor::get_gpu_info().unwrap_or_else(|_| GpuInfo {
+            name: "Unknown".to_string(),
+            temperature: 0,
+            memory_used_mb: 0,
+            memory_total_mb: 0,
+            utilization_percent: 0,
+            fan_speed_percent: None,
+        })
     }
 }

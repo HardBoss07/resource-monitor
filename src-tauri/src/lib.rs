@@ -4,7 +4,7 @@ mod monitors;
 mod resource_monitor;
 
 use resource_monitor::ResourceMonitor;
-use data_structures::{ResourceData, CpuInfo, SystemInfo, MemoryInfo};
+use data_structures::{ResourceData, CpuInfo, SystemInfo, MemoryInfo, GpuInfo};
 
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #[cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
@@ -41,6 +41,12 @@ fn get_memory_data() -> MemoryInfo {
   monitor.collect_memory_data()
 }
 
+#[tauri::command]
+fn get_gpu_data() -> GpuInfo {
+  let mut monitor = ResourceMonitor::new();
+  monitor.collect_gpu_data()
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -55,7 +61,7 @@ pub fn run() {
             Ok(())
         })
         // Register your commands here
-        .invoke_handler(tauri::generate_handler![greet, get_all_resource_data, get_cpu_data, get_system_data, get_memory_data])
+        .invoke_handler(tauri::generate_handler![greet, get_all_resource_data, get_cpu_data, get_system_data, get_memory_data, get_gpu_data])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
