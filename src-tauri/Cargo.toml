@@ -26,3 +26,10 @@ tauri = { version = "2.6.2", features = [] } # <--- Removed "os" feature here
 tauri-plugin-log = "2"
 sysinfo = "^0.30.5"
 nvml-wrapper = "0.11.0"
+
+[profile.release]
+opt-level = 's'    # Optimize for binary size ('s' for size, 'z' for min size)
+lto = true         # Enable Link Time Optimization
+codegen-units = 1  # Reduce code generation units to 1 (can increase compile time but reduce size)
+panic = 'abort'    # Abort on panic instead of unwinding (smaller binaries, but no stack trace on crash)
+strip = true       # Strip debug symbols from the binary
