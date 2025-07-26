@@ -47,7 +47,9 @@ export default function CpuInfo() {
                 <p>Clock Frequency MHz: {cpuInfo.frequency}</p>
                 <p>Cores: {cpuInfo.cores}</p>
             </div>
-            <LineGraph dataPoints={usageHistory} label="CPU Usage:"/>
+            <div className="mt-auto">
+                <LineGraph dataPoints={usageHistory} label="CPU Usage:"/>
+            </div>
         </div>
     );
 }
