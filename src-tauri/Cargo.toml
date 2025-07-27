@@ -1,8 +1,8 @@
 # src-tauri/Cargo.toml
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
+name = "resource-monitor"
+version = "1.0.1"
+description = "A simple Resource Monitor"
 authors = ["you"]
 license = ""
 repository = ""
