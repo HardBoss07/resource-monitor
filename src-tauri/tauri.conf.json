@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "resource-monitor",
-  "version": "0.1.0",
-  "identifier": "ch.bosshard.matteo.resource-monitor",
+  "productName": "Resource Monitor",
+  "version": "1.0.1",
+  "identifier": "ResourceMonitor",
   "build": {
     "frontendDist": "../out",
     "devUrl": "http://localhost:3000",
