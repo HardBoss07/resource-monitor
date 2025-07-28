@@ -51,7 +51,9 @@ export default function MemoryInfo() {
                 <p>Current Used Memory MB (%): {memoryInfo.used} ({usedPercentage}%)</p>
                 <p>Current Free Memory MB (%): {memoryInfo.free} ({freePercentage}%)</p>
             </div>
-            <LineGraph dataPoints={memoryHistory} upperRange={memoryInfo.total} label="Memory Usage (MB):"/>
+            <div className="mt-auto">
+                <LineGraph dataPoints={memoryHistory} upperRange={memoryInfo.total} label="Memory Usage (MB):"/>
+            </div>
         </div>
     )
 }

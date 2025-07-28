@@ -54,7 +54,9 @@ export default function GpuInfo() {
                 <p>Current Utilization: {gpuInfo.utilization_percent}%</p>
                 <p>Fan Speed: {gpuInfo.fan_speed_percent ?? "N/A"}%</p>
             </div>
-            <LineGraph dataPoints={utilizationHistory} label="Utilization History:"/>
+            <div className="mt-auto">
+                <LineGraph dataPoints={utilizationHistory} label="Utilization History:"/>
+            </div>
         </div>
     );
 }
