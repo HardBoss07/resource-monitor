@@ -1,8 +1,14 @@
 'use client'
 
-import {LineGraphInterface} from "@/util/interfaces/LineGraphInterface";
+import { LineGraphInterface } from "@/util/interfaces/LineGraphInterface";
 
-export default function LineGraph({dataPoints, label, maxPoints = 100, upperRange = 100}: LineGraphInterface) {
+export default function LineGraph({
+    dataPoints,
+    label,
+    maxPoints = 100,
+    upperRange = 100,
+    lineColor = "text-gray-900 dark:text-zinc-100" // Default fallback
+}: LineGraphInterface) {
     const data = dataPoints.slice(-maxPoints);
 
     const width = 450;
@@ -25,8 +31,6 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
             ? `${width / 2},${height / 2}`
             : "";
 
-    const gridLineColor = "#666";
-    const textColor = "#444";
     const fontSize = "11";
 
     const getGridY = (percentage: number) => {
@@ -35,13 +39,14 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
     };
 
     return (
-        <div className="line-graph" style={{maxWidth: width, width: '100%'}}>
-            {label && <h3 style={{marginBottom: 4}}>{label}</h3>}
+        <div className="line-graph" style={{ maxWidth: width, width: '100%' }}>
+            {label && <h3 style={{ marginBottom: 4 }}>{label}</h3>}
             <svg
                 viewBox={`0 0 ${width} ${height}`}
                 width="100%"
                 height={height}
-                style={{display: "block"}}
+                style={{ display: "block" }}
+                className="text-gray-400 dark:text-zinc-600"
             >
                 {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((percentage) => {
                     const lineY = getGridY(percentage);
@@ -52,7 +57,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                             y1={lineY}
                             x2={width}
                             y2={lineY}
-                            stroke={gridLineColor}
+                            stroke="currentColor"
                             strokeWidth="1"
                             strokeDasharray="4 2"
                         />
@@ -62,7 +67,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 <text
                     x={padding + 3}
                     y={getGridY(100) - 3}
-                    fill={textColor}
+                    stroke="currentColor"
                     fontSize={fontSize}
                     dominantBaseline="auto"
                 >
@@ -71,7 +76,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 <text
                     x={width - padding - 3}
                     y={getGridY(100) - 3}
-                    fill={textColor}
+                    stroke="currentColor"
                     fontSize={fontSize}
                     dominantBaseline="auto"
                     textAnchor="end"
@@ -82,7 +87,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 <text
                     x={padding + 3}
                     y={getGridY(0) + 12}
-                    fill={textColor}
+                    stroke="currentColor"
                     fontSize={fontSize}
                     dominantBaseline="hanging"
                 >
@@ -91,7 +96,7 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
                 <text
                     x={width - padding - 3}
                     y={getGridY(0) + 12}
-                    fill={textColor}
+                    stroke="currentColor"
                     fontSize={fontSize}
                     dominantBaseline="hanging"
                     textAnchor="end"
@@ -101,7 +106,8 @@ export default function LineGraph({dataPoints, label, maxPoints = 100, upperRang
 
                 <polyline
                     fill="none"
-                    stroke="#000"
+                    stroke="currentColor"
+                    className={lineColor}
                     strokeWidth="2"
                     points={points}
                     strokeLinecap="round"

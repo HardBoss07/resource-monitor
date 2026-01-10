@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import {useEffect, useRef, useState} from "react";
-import {invoke} from "@tauri-apps/api/core";
+import { useEffect, useRef, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
-import type {CpuInfoInterface} from "@/util/interfaces/CpuInfoInterface";
+import type { CpuInfoInterface } from "@/util/interfaces/CpuInfoInterface";
 import LineGraph from "@/components/LineGraph";
-import {FETCH_DELAY_MS} from "@/util/consts";
+import { FETCH_DELAY_MS } from "@/util/consts";
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function CpuInfo() {
     const [cpuInfo, setCpuInfo] = useState<CpuInfoInterface | null>(null);
@@ -19,7 +19,7 @@ export default function CpuInfo() {
             try {
                 const data = await invoke<CpuInfoInterface>("get_cpu_data");
                 setCpuInfo(data);
-                setUsageHistory(prev => [...prev.slice(-99), data.usage]); // keep last 100
+                setUsageHistory((prev) => [...prev.slice(-99), data.usage]); // keep last 100
             } catch (err) {
                 console.error("Failed to fetch CPU Data:", err);
                 break;
@@ -48,7 +48,11 @@ export default function CpuInfo() {
                 <p>Cores: {cpuInfo.cores}</p>
             </div>
             <div className="mt-auto">
-                <LineGraph dataPoints={usageHistory} label="CPU Usage:"/>
+                <LineGraph
+                    dataPoints={usageHistory}
+                    label="CPU Usage:"
+                    lineColor="text-pink-600 dark:text-fuchsia-400"
+                />
             </div>
         </div>
     );

@@ -1,11 +1,11 @@
 'use client'
 
-import React, {useEffect, useRef, useState} from "react";
-import {invoke} from "@tauri-apps/api/core";
+import React, { useEffect, useRef, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
-import type {GpuInfoInterface} from "@/util/interfaces/GpuInfoInterface";
+import type { GpuInfoInterface } from "@/util/interfaces/GpuInfoInterface";
 import LineGraph from "@/components/LineGraph";
-import {FETCH_DELAY_MS} from "@/util/consts";
+import { FETCH_DELAY_MS } from "@/util/consts";
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -55,7 +55,11 @@ export default function GpuInfo() {
                 <p>Fan Speed: {gpuInfo.fan_speed_percent ?? "N/A"}%</p>
             </div>
             <div className="mt-auto">
-                <LineGraph dataPoints={utilizationHistory} label="Utilization History:"/>
+                <LineGraph
+                    dataPoints={utilizationHistory}
+                    label="GPU Usage:"
+                    lineColor="text-emerald-500 dark:text-green-400"
+                />
             </div>
         </div>
     );

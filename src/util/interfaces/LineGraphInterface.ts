@@ -3,4 +3,5 @@ export interface LineGraphInterface {
     label: string;
     maxPoints?: number;
     upperRange?: number;
+    lineColor?: string;
 }

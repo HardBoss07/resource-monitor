@@ -1,11 +1,11 @@
 'use client'
 
-import {useEffect, useRef, useState} from "react";
-import {invoke} from "@tauri-apps/api/core";
+import { useEffect, useRef, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
-import type {MemoryInfoInterface} from "@/util/interfaces/MemoryInfoInterface";
+import type { MemoryInfoInterface } from "@/util/interfaces/MemoryInfoInterface";
 import LineGraph from "@/components/LineGraph";
-import {FETCH_DELAY_MS} from "@/util/consts";
+import { FETCH_DELAY_MS } from "@/util/consts";
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -52,7 +52,12 @@ export default function MemoryInfo() {
                 <p>Current Free Memory MB (%): {memoryInfo.free} ({freePercentage}%)</p>
             </div>
             <div className="mt-auto">
-                <LineGraph dataPoints={memoryHistory} upperRange={memoryInfo.total} label="Memory Usage (MB):"/>
+                <LineGraph
+                    dataPoints={memoryHistory}
+                    upperRange={memoryInfo.total}
+                    label="Memory Usage (MB):"
+                    lineColor="text-cyan-500 dark:text-cyan-300"
+                />
             </div>
         </div>
     )
