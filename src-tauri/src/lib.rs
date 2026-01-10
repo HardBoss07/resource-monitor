@@ -50,9 +50,10 @@ fn get_gpu_data(monitor: State<SharedResourceMonitor>) -> GpuInfo {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let monitor = ResourceMonitor::new().expect("Failed to initialize ResourceMonitor");
+    let monitor = ResourceMonitor::new().expect("Failed to initialize Resource Monitor");
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_window_state::Builder::default().build())
         .manage(Mutex::new(monitor))
         .setup(|app| {
             if cfg!(debug_assertions) {
@@ -73,5 +74,5 @@ pub fn run() {
             get_gpu_data
         ])
         .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .expect("Failed to run Resource Monitor");
 }

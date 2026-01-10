@@ -1,7 +1,7 @@
 # src-tauri/Cargo.toml
 [package]
 name = "resource-monitor"
-version = "1.0.1"
+version = "1.0.2"
 description = "A simple Resource Monitor"
 authors = ["you"]
 license = ""
@@ -26,6 +26,7 @@ tauri = { version = "2.6.2", features = [] } # <--- Removed "os" feature here
 tauri-plugin-log = "2"
 sysinfo = "^0.30.5"
 nvml-wrapper = "0.11.0"
+tauri-plugin-window-state = "2.4.1"
 
 [profile.release]
 opt-level = 's'    # Optimize for binary size ('s' for size, 'z' for min size)
