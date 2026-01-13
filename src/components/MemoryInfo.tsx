@@ -2,12 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-
 import type { MemoryInfoInterface } from "@/util/interfaces/MemoryInfoInterface";
 import LineGraph from "@/components/LineGraph";
-import { FETCH_DELAY_MS } from "@/util/consts";
+import {sleep} from "@/util/sleep";
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export default function MemoryInfo() {
     const [memoryInfo, setMemoryInfo] = useState<MemoryInfoInterface | null>(null);
@@ -24,7 +22,7 @@ export default function MemoryInfo() {
                 console.error("Failed to get Memory Data:", err);
                 break;
             }
-            await sleep(FETCH_DELAY_MS);
+            await sleep();
         }
     };
 

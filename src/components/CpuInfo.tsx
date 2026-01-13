@@ -1,13 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-
-import type { CpuInfoInterface } from "@/util/interfaces/CpuInfoInterface";
+import {useEffect, useRef, useState} from "react";
+import {invoke} from "@tauri-apps/api/core";
+import type {CpuInfoInterface} from "@/util/interfaces/CpuInfoInterface";
 import LineGraph from "@/components/LineGraph";
-import { FETCH_DELAY_MS } from "@/util/consts";
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import {sleep} from "@/util/sleep";
 
 export default function CpuInfo() {
     const [cpuInfo, setCpuInfo] = useState<CpuInfoInterface | null>(null);
@@ -24,7 +21,7 @@ export default function CpuInfo() {
                 console.error("Failed to fetch CPU Data:", err);
                 break;
             }
-            await sleep(FETCH_DELAY_MS);
+            await sleep();
         }
     };
 
