@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ResourceData {
     pub cpu: CpuInfo,
-    pub sys: SystemInfo, 
+    pub sys: SystemInfo,
     pub mem: MemoryInfo,
     pub gpu: GpuInfo,
     pub timestamp_ms: u64,
@@ -14,9 +14,10 @@ pub struct ResourceData {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CpuInfo {
     pub name: String,
-    pub usage: f32, 
+    pub usage: f32,
     pub frequency: u64,
     pub cores: usize,
+    pub temperature: Option<f32>,
 }
 
 // Represents the GPU information

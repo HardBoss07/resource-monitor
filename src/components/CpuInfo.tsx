@@ -43,6 +43,16 @@ export default function CpuInfo() {
                 <p>Current Usage: {cpuInfo.usage.toFixed(1)}%</p>
                 <p>Clock Frequency MHz: {cpuInfo.frequency}</p>
                 <p>Cores: {cpuInfo.cores}</p>
+                <p>
+                    Temperature:{" "}
+                    {cpuInfo.temperature !== null ? (
+                      `${cpuInfo.temperature.toFixed(1)}°C`
+                    ) : (
+                      <span className="text-red-500 font-medium">
+                        Error getting CPU Temperature
+                      </span>
+                    )}
+                </p>
             </div>
             <div className="mt-auto">
                 <LineGraph

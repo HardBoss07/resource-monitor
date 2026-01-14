@@ -1,5 +1,5 @@
-use sysinfo::{System};
 use crate::data_structures::SystemInfo;
+use sysinfo::System;
 
 #[derive(Debug)]
 pub struct SystemMonitor;

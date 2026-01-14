@@ -3,4 +3,5 @@ export interface CpuInfoInterface {
     usage: number;
     frequency: number;
     cores: number;
+    temperature: number|null;
 }

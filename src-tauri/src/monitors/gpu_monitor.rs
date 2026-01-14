@@ -1,17 +1,21 @@
-use nvml_wrapper::Nvml;
-use nvml_wrapper::enum_wrappers::device::TemperatureSensor;
-use crate::data_structures::GpuInfo;
 use crate::consts::MB;
+use crate::data_structures::GpuInfo;
+use nvml_wrapper::enum_wrappers::device::TemperatureSensor;
+use nvml_wrapper::Nvml;
 
 #[derive(Debug)]
 pub struct GpuMonitor;
 
 impl GpuMonitor {
     pub fn get_gpu_info(nvml: &Nvml) -> Result<GpuInfo, String> {
-        let device = nvml.device_by_index(0).map_err(|e| format!("Failed to get device: {}", e))?;
+        let device = nvml
+            .device_by_index(0)
+            .map_err(|e| format!("Failed to get device: {}", e))?;
 
         let name = device.name().map_err(|e| e.to_string())?;
-        let temperature = device.temperature(TemperatureSensor::Gpu).map_err(|e| e.to_string())?;
+        let temperature = device
+            .temperature(TemperatureSensor::Gpu)
+            .map_err(|e| e.to_string())?;
         let memory = device.memory_info().map_err(|e| e.to_string())?;
         let utilization = device.utilization_rates().map_err(|e| e.to_string())?;
 

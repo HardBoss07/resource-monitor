@@ -1,7 +1,10 @@
+use crate::data_structures::{CpuInfo, GpuInfo, MemoryInfo, ResourceData, SystemInfo};
+use crate::monitors::{
+    cpu_monitor::CpuMonitor, gpu_monitor::GpuMonitor, memory_monitor::MemoryMonitor,
+    system_monitor::SystemMonitor,
+};
 use nvml_wrapper::Nvml;
 use sysinfo::System;
-use crate::data_structures::{CpuInfo, ResourceData, SystemInfo, MemoryInfo, GpuInfo};
-use crate::monitors::{cpu_monitor::CpuMonitor, system_monitor::SystemMonitor, memory_monitor::MemoryMonitor, gpu_monitor::GpuMonitor};
 
 pub struct ResourceMonitor {
     sys: System,

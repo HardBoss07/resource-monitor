@@ -1,6 +1,6 @@
-use sysinfo::System;
-use crate::data_structures::MemoryInfo;
 use crate::consts::MB;
+use crate::data_structures::MemoryInfo;
+use sysinfo::System;
 
 #[derive(Debug)]
 pub struct MemoryMonitor;

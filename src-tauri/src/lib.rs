@@ -1,17 +1,16 @@
+mod consts;
 mod data_structures;
 mod monitors;
 mod resource_monitor;
-mod consts;
 
+use data_structures::{CpuInfo, GpuInfo, MemoryInfo, ResourceData, SystemInfo};
+use resource_monitor::ResourceMonitor;
 use std::sync::Mutex;
 use tauri::State;
-use resource_monitor::ResourceMonitor;
-use data_structures::{ResourceData, CpuInfo, SystemInfo, MemoryInfo, GpuInfo};
 
 type SharedResourceMonitor = Mutex<ResourceMonitor>;
 
 #[cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-
 #[tauri::command]
 fn greet(name: &str) -> String {
     println!("Received greet command with name: {}", name);
