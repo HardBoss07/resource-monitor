@@ -16,7 +16,8 @@ A lightweight and efficient desktop application for monitoring your system's res
 
 ### Supported Operating Systems:
 
-* **Windows**
+* **Windows x64**
+* **Linux x64** - AppImage & .deb
 
 ### Hardware Compatibility:
 
@@ -28,7 +29,7 @@ A lightweight and efficient desktop application for monitoring your system's res
 
 You can easily install Resource Monitor on your Windows system using one of the provided installers.
 
-1.  Go to the [Releases page](https://github.com/HardBoss07/resource-monitor/releases/tag/v0.1.0) of this repository.
+1.  Go to the [Releases page](https://github.com/HardBoss07/resource-monitor/releases/latest) of this repository.
 
 2.  Download your preferred installer from the **Assets** section of the latest release:
 
