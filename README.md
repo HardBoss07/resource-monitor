@@ -17,7 +17,7 @@ A lightweight and efficient desktop application for monitoring your system's res
 ### Supported Operating Systems:
 
 * **Windows x64**
-* **Linux x64** - AppImage & .deb
+* **Linux x64** - AppImage & .deb *(only when building from source)*
 
 ### Hardware Compatibility:
 
