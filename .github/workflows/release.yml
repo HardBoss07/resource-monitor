@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      # Checkout
+      # Checkout the repo
       - uses: actions/checkout@v4
 
       # Extract version from Cargo.toml
@@ -32,7 +32,7 @@ jobs:
           VERSION=$(grep '^version' src-tauri/Cargo.toml | head -n1 | cut -d '"' -f2)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      # Fail if tag != Cargo version
+      # Fail if tag != Cargo.toml version
       - name: Validate tag matches Cargo.toml
         shell: bash
         run: |
@@ -42,18 +42,18 @@ jobs:
             exit 1
           fi
 
-      # Setup Node
+      # Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
-      # Setup Rust (stable = production)
+      # Setup Rust
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
 
-      # Linux system deps
+      # Linux dependencies
       - name: Install Linux dependencies
         if: matrix.os == 'ubuntu-latest'
         run: |
@@ -64,18 +64,12 @@ jobs:
             librsvg2-dev \
             patchelf
 
-      # Install frontend deps
+      # Install frontend dependencies
       - run: npm ci
 
-      # Build & Upload to release
+      # Build & upload Tauri app
       - name: Build Tauri App
-        uses: tauri-apps/tauri-action@v0
+        run: npm run tauri:build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUSTFLAGS: "-C strip=symbols"
-        with:
-          tagName: v${{ steps.cargo_version.outputs.version }}
-          releaseName: Resource Monitor v${{ steps.cargo_version.outputs.version }}
-          releaseDraft: false
-          prerelease: false
-          args: --locked
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
