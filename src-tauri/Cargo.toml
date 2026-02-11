@@ -1,13 +1,13 @@
 # src-tauri/Cargo.toml
 [package]
 name = "resource-monitor"
-version = "1.0.2"
+version = "1.0.3"
 description = "A simple Resource Monitor"
-authors = ["you"]
-license = ""
-repository = ""
-edition = "2021"
-rust-version = "1.77.2"
+authors = ["Matteo 'M4tt3o' Bosshard <https://m4tt3o.dev>"]
+license = "GPL-3.0"
+repository = "https://github.com/HardBoss07/resource-monitor"
+edition = "2024"
+rust-version = "1.94.0-nightly"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -33,6 +33,5 @@ systemstat = "0.2.5"
 [profile.release]
 opt-level = 's'    # Optimize for binary size ('s' for size, 'z' for min size)
 lto = true         # Enable Link Time Optimization
-codegen-units = 1  # Reduce code generation units to 1 (can increase compile time but reduce size)
 panic = 'abort'    # Abort on panic instead of unwinding (smaller binaries, but no stack trace on crash)
 strip = true       # Strip debug symbols from the binary

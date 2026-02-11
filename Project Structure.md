@@ -1,34 +1,36 @@
 # Project Structure
 
 ```
-.
-├── src
-│   ├── app
+resource-monitor/
+├── public/
+├── src/
+│   ├── app/
 │   │   ├── globals.css
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── components
+│   ├── components/
 │   │   ├── CpuInfo.tsx
 │   │   ├── GpuInfo.tsx
 │   │   ├── LineGraph.tsx
 │   │   ├── MemoryInfo.tsx
 │   │   └── SystemInfo.tsx
-│   └── util
-│       ├── interfaces
+│   └── util/
+│       ├── interfaces/
 │       │   ├── CpuInfoInterface.ts
 │       │   ├── GpuInfoInterface.ts
 │       │   ├── LineGraphInterface.ts
 │       │   ├── MemoryInfoInterface.ts
 │       │   └── SystemInfoInterface.ts
-│       └── consts.ts
-├── src-tauri
-│   ├── capabilities
+│       ├── consts.ts
+│       └── sleep.ts
+├── src-tauri/
+│   ├── capabilities/
 │   │   └── default.json
-│   ├── gen
-│   ├── icons
+│   ├── gen/
+│   ├── icons/
 │   │   └── icon.ico
-│   ├── src
-│   │   ├── monitors
+│   ├── src/
+│   │   ├── monitors/
 │   │   │   ├── cpu_monitor.rs
 │   │   │   ├── gpu_monitor.rs
 │   │   │   ├── memory_monitor.rs
@@ -44,6 +46,7 @@
 │   ├── build.rs
 │   └── tauri.conf.json
 ├── LICENSE
+├── Project Structure.md
 ├── README.md
 ├── next.config.ts
 ├── package-lock.json

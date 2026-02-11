@@ -2935,7 +2935,7 @@ dependencies = [
 
 [[package]]
 name = "resource-monitor"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "log",
  "nvml-wrapper",

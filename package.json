@@ -1,6 +1,6 @@
 {
   "name": "resource-monitor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,16 +10,16 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@tauri-apps/api": "^2.6.0",
+    "@tauri-apps/api": "^2.10.1",
     "@tauri-apps/plugin-window-state": "^2.4.1",
-    "next": "^15.4.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "next": "^16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@tauri-apps/cli": "^2.9.6",
-    "@types/node": "^20",
+    "@tauri-apps/cli": "^2.10.0",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
