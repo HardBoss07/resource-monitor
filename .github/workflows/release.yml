@@ -1,0 +1,81 @@
+name: Release (Tauri)
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+
+      # Extract version from Cargo.toml
+      - name: Get version from Cargo.toml
+        id: cargo_version
+        shell: bash
+        run: |
+          VERSION=$(grep '^version' src-tauri/Cargo.toml | head -n1 | cut -d '"' -f2)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      # Fail if tag != Cargo version
+      - name: Validate tag matches Cargo.toml
+        shell: bash
+        run: |
+          TAG=${GITHUB_REF_NAME#v}
+          if [ "$TAG" != "${{ steps.cargo_version.outputs.version }}" ]; then
+            echo "Tag version ($TAG) does not match Cargo.toml version (${{ steps.cargo_version.outputs.version }})"
+            exit 1
+          fi
+
+      # Setup Node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      # Setup Rust (stable = production)
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      # Linux system deps
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf
+
+      # Install frontend deps
+      - run: npm ci
+
+      # Build & Upload to release
+      - name: Build Tauri App
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUSTFLAGS: "-C strip=symbols"
+        with:
+          tagName: v${{ steps.cargo_version.outputs.version }}
+          releaseName: Resource Monitor v${{ steps.cargo_version.outputs.version }}
+          releaseDraft: false
+          prerelease: false
+          args: --locked
